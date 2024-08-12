@@ -2,6 +2,11 @@ package basicmaths;
 
 import java.util.Scanner;
 
+/*
+Problem:
+    https://takeuforward.org/maths/reverse-digits-of-a-number
+    https://www.naukri.com/code360/problems/reverse-bits_2181102?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
+ */
 public class ReverseNumber {
 
     /*
