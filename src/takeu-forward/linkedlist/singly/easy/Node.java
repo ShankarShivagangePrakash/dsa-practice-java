@@ -3,13 +3,13 @@ package linkedlist.singly.easy;
 public class Node {
 
     int val;
-    Node next;
+    public Node next;
 
-    Node(){
+    public Node(){
         this.val = 0;
     }
 
-    Node(int val){
+    public Node(int val){
         this.val = val;
     }
 }
