@@ -2,9 +2,9 @@ package linkedlist.doubly.easy;
 
 public class Node {
 
-    int val;
-    Node next;
-    Node prev;
+    public int val;
+    public Node next;
+    public Node prev;
 
     Node(){
         this.val = 0;
