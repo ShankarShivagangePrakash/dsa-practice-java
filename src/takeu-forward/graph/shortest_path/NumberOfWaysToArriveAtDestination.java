@@ -1,6 +1,6 @@
 package graph.shortest_path;
 
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -30,12 +30,12 @@ public class NumberOfWaysToArriveAtDestination {
         int mod = (int)(1e9 + 7);
 
         // creating adjaceny list from the 2D matrix
-        ArrayList<ArrayList<Pair<Integer, Integer>>> adj = new ArrayList<ArrayList<Pair<Integer, Integer>>>();
+        ArrayList<ArrayList<SimpleEntry<Integer, Integer>>> adj = new ArrayList<ArrayList<SimpleEntry<Integer, Integer>>>();
         for(int i = 0; i < n; i++)
             adj.add(new ArrayList<>());
         for(int i = 0; i < roads.length; i++){
-            adj.get(roads[i][0]).add(new Pair<>(roads[i][1], roads[i][2]));
-            adj.get(roads[i][1]).add(new Pair<>(roads[i][0], roads[i][2]));
+            adj.get(roads[i][0]).add(new SimpleEntry<>(roads[i][1], roads[i][2]));
+            adj.get(roads[i][1]).add(new SimpleEntry<>(roads[i][0], roads[i][2]));
         }
 
         // create distance and weight array and initalise
@@ -53,16 +53,16 @@ public class NumberOfWaysToArriveAtDestination {
         ways[0] = 1;
 
         // Priority Queue will store entries in the format (distance, node)
-        PriorityQueue<Pair<Integer, Integer>> priorityQueue = new PriorityQueue<Pair<Integer, Integer>>((x, y) -> (int)x.getKey() - (int)y.getKey());
+        PriorityQueue<SimpleEntry<Integer, Integer>> priorityQueue = new PriorityQueue<SimpleEntry<Integer, Integer>>((x, y) -> (int)x.getKey() - (int)y.getKey());
 
-        priorityQueue.add(new Pair<>(0, 0));
+        priorityQueue.add(new SimpleEntry<>(0, 0));
 
         while(!priorityQueue.isEmpty()){
-            Pair pair = priorityQueue.poll();
+            SimpleEntry pair = priorityQueue.poll();
             int dist = (int) pair.getKey();
             int node = (int) pair.getValue();
 
-            for(Pair p : adj.get(node)){
+            for(SimpleEntry p : adj.get(node)){
                 int adjNode = (int) p.getKey();
                 int edgeWeight = (int) p.getValue();
 
@@ -71,7 +71,7 @@ public class NumberOfWaysToArriveAtDestination {
                 if(dist + edgeWeight < distance[adjNode]){
                     distance[adjNode] = dist + edgeWeight;
                     ways[adjNode] = ways[node];
-                    priorityQueue.add(new Pair<>(distance[adjNode], adjNode));
+                    priorityQueue.add(new SimpleEntry<>(distance[adjNode], adjNode));
                 }
                 // if cost is equal means, current path is a new way to reach new node
                 // so we have consider all paths which are previously existing and explored now

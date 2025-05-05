@@ -1,6 +1,6 @@
 package graph.learning.bfsdfs;
 
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 
 import java.util.*;
 
@@ -42,11 +42,11 @@ public class WordLadder1 {
 
         set.remove(beginWord);
 
-        Queue<Pair<String, Integer>> queue = new LinkedList<>();
-        queue.offer(new Pair<>(beginWord, 1));
+        Queue<SimpleEntry<String, Integer>> queue = new LinkedList<>();
+        queue.offer(new SimpleEntry<>(beginWord, 1));
 
         while(!queue.isEmpty()){
-            Pair temp = queue.poll();
+            SimpleEntry temp = queue.poll();
 
             String word = (String) temp.getKey();
             int level = (int) temp.getValue();
@@ -70,7 +70,7 @@ public class WordLadder1 {
                         // since we don't have that visited array here, we can just remove that word from set.
                         // we will simply remove that word from the set to avoid traversing to same path again.
                         set.remove(newWord);
-                        queue.offer(new Pair<>(newWord, level + 1));
+                        queue.offer(new SimpleEntry<>(newWord, level + 1));
                     }
                 }
             }

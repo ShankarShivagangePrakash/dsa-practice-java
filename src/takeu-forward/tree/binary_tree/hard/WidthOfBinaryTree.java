@@ -1,8 +1,9 @@
 package tree.binary_tree.hard;
 
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 import tree.binary_tree.traversal.TreeNode;
 
+import java.util.AbstractMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -31,10 +32,10 @@ public class WidthOfBinaryTree {
         int answer = 0;
 
         // Create a queue to perform level-order traversal, where each element is a pair of TreeNode and its position in the level
-        Queue<Pair<TreeNode, Integer>> queue = new LinkedList<>();
+        Queue<AbstractMap.SimpleEntry<TreeNode, Integer>> queue = new LinkedList<>();
 
         // Push the root node and its position (0) into the queue
-        queue.offer(new Pair<>(root, 0));
+        queue.offer(new AbstractMap.SimpleEntry<>(root, 0));
 
         // Perform level-order traversal
         while(!queue.isEmpty()){
@@ -64,10 +65,10 @@ public class WidthOfBinaryTree {
 
                 // if left and right child exists add them to queue, with their positions
                 if(node.left != null)
-                    queue.offer(new Pair<>(node.left, 2 * currentNodeId + 1));
+                    queue.offer(new SimpleEntry<>(node.left, 2 * currentNodeId + 1));
 
                 if(node.right != null)
-                    queue.offer(new Pair<>(node.right, 2 * currentNodeId + 2));
+                    queue.offer(new SimpleEntry<>(node.right, 2 * currentNodeId + 2));
             }
             // compute maximum length in current level, compare with `answer` and update
             answer = Math.max(answer, last - first + 1);

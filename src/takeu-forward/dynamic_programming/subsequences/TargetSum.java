@@ -1,6 +1,6 @@
 package dynamic_programming.subsequences;
 
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -62,19 +62,19 @@ public class TargetSum {
      */
     public int targetSumMemoizationMain(int[] nums, int target) {
         int n = nums.length;
-        HashMap<Pair<Integer, Integer>, Integer> map = new HashMap();
+        HashMap<SimpleEntry<Integer, Integer>, Integer> map = new HashMap();
 
         return targetSumMemoization(n-1, target, nums, map);
     }
 
-    public int targetSumMemoization(int ind, int target, int[] nums, HashMap<Pair<Integer, Integer>, Integer> map){
+    public int targetSumMemoization(int ind, int target, int[] nums, HashMap<SimpleEntry<Integer, Integer>, Integer> map){
 
         if (ind < 0) {
             return target == 0 ? 1 : 0;
         }
 
-        if(map.containsKey(new Pair<>(ind, target)))
-            return map.get(new Pair<>(ind, target));
+        if(map.containsKey(new SimpleEntry<>(ind, target)))
+            return map.get(new SimpleEntry<>(ind, target));
 
         /* Recursive case: consider both '+' and '-' for the current number
          when you include +/- general form is
@@ -89,7 +89,7 @@ public class TargetSum {
         int includeMinus = targetSumMemoization(ind - 1, target + nums[ind], nums, map);
 
         int val = includePlus + includeMinus;
-        map.put(new Pair<>(ind, target), val);
+        map.put(new SimpleEntry<>(ind, target), val);
         return val;
     }
 

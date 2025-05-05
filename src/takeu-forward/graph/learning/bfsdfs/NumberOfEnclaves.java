@@ -1,6 +1,6 @@
 package graph.learning.bfsdfs;
 
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -29,7 +29,7 @@ public class NumberOfEnclaves {
 
         boolean[][] visited = new boolean[n][m];
 
-        Queue<Pair<Integer, Integer>> queue = new LinkedList<>();
+        Queue<SimpleEntry<Integer, Integer>> queue = new LinkedList<>();
 
         int[] deltaRow = {0, 1, 0, -1};
         int[] deltaCol = {1, 0, -1, 0};
@@ -37,11 +37,11 @@ public class NumberOfEnclaves {
         // first row, last row
         for(int i = 0; i < m; i++){
             if(grid[0][i] == 1 && visited[0][i] == false) {
-                queue.offer(new Pair<>(0, i));
+                queue.offer(new SimpleEntry<>(0, i));
                 visited[0][i] = true;
             }
             if(grid[n-1][i] == 1 && visited[n-1][i] == false){
-                queue.offer(new Pair<>(n-1, i));
+                queue.offer(new SimpleEntry<>(n-1, i));
                 visited[n-1][i] = true;
             }
         }
@@ -49,17 +49,17 @@ public class NumberOfEnclaves {
         // first column, last column
         for(int i = 0; i < n; i++){
             if(grid[i][0] == 1 && visited[i][0] == false){
-                queue.offer(new Pair<>(i, 0));
+                queue.offer(new SimpleEntry<>(i, 0));
                 visited[i][0] = true;
             }
             if(grid[i][m-1] == 1 && visited[i][m-1] == false){
-                queue.offer(new Pair<>(i, m-1));
+                queue.offer(new SimpleEntry<>(i, m-1));
                 visited[i][m-1] = true;
             }
         }
 
         while (!queue.isEmpty()){
-            Pair temp = queue.poll();
+            SimpleEntry temp = queue.poll();
             int row = (int) temp.getKey();
             int col = (int) temp.getValue();
 
@@ -69,7 +69,7 @@ public class NumberOfEnclaves {
 
                 if(nRow >= 0 && nRow < n && nCol >= 0 && nCol < m
                         && visited[nRow][nCol] == false && grid[nRow][nCol] == 1){
-                    queue.offer(new Pair<>(nRow, nCol));
+                    queue.offer(new SimpleEntry<>(nRow, nCol));
                     visited[nRow][nCol] = true;
                 }
             }

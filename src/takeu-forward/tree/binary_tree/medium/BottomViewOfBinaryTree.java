@@ -1,6 +1,6 @@
 package tree.binary_tree.medium;
 
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 import tree.binary_tree.traversal.TreeNode;
 
 import java.util.*;
@@ -23,14 +23,14 @@ public class BottomViewOfBinaryTree {
         Map<Integer, Integer> map = new TreeMap<>();
 
         // Queue for BFS traversal, each element is a pair containing node and its vertical position
-        Queue<Pair<TreeNode, Integer>> queue = new LinkedList<>();
+        Queue<SimpleEntry<TreeNode, Integer>> queue = new LinkedList<>();
 
         // Push the root node with its vertical position (0) into the queue
-        queue.offer(new Pair<>(root, 0));
+        queue.offer(new SimpleEntry<>(root, 0));
 
         while (!queue.isEmpty()) {
             // Retrieve the node and its vertical position from the front of the queue
-            Pair<TreeNode, Integer> p = queue.poll();
+            SimpleEntry<TreeNode, Integer> p = queue.poll();
             TreeNode node = p.getKey();
             int vertical = p.getValue();
 
@@ -39,11 +39,11 @@ public class BottomViewOfBinaryTree {
 
             // Push the left child with a decreased vertical position into the queue
             if(node.left != null)
-                queue.offer(new Pair<>(node.left, vertical - 1));
+                queue.offer(new SimpleEntry<>(node.left, vertical - 1));
 
             // Push the right child with an increased vertical position into the queue
             if(node.right != null)
-                queue.offer(new Pair<>(node.right, vertical + 1));
+                queue.offer(new SimpleEntry<>(node.right, vertical + 1));
         }
 
         // Transfer values from the map to the result list

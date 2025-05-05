@@ -1,6 +1,6 @@
 package graph.shortest_path;
 
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 import sun.awt.image.ImageWatched;
 
 import java.util.ArrayList;
@@ -24,12 +24,12 @@ public class MinimumStepsToReachEndWithMultiplication {
         steps[start] = 0;
 
         // stores info in the form of (steps, node)
-        Queue<Pair<Integer, Integer>> queue = new LinkedList<>();
+        Queue<SimpleEntry<Integer, Integer>> queue = new LinkedList<>();
 
-        queue.add(new Pair<>(0, start));
+        queue.add(new SimpleEntry<>(0, start));
 
         while(!queue.isEmpty()){
-            Pair pair = queue.poll();
+            SimpleEntry pair = queue.poll();
 
             int stepsTaken = (int) pair.getKey();
             int node = (int) pair.getValue();
@@ -39,7 +39,7 @@ public class MinimumStepsToReachEndWithMultiplication {
 
                 if(stepsTaken + 1 <  steps[newNumber]){
                     steps[newNumber] = stepsTaken + 1;
-                    queue.add(new Pair(steps[newNumber], newNumber));
+                    queue.add(new SimpleEntry(steps[newNumber], newNumber));
 
                     if(newNumber == end)
                         return stepsTaken + 1;

@@ -1,6 +1,6 @@
 package graph.learning.bfsdfs;
 
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -63,11 +63,11 @@ public class NumberOfDistinctIslands {
 
         visited[i][j] = true;
 
-        Queue<Pair<Integer, Integer>> queue = new LinkedList<>();
-        queue.offer(new Pair<>(i, j));
+        Queue<SimpleEntry<Integer, Integer>> queue = new LinkedList<>();
+        queue.offer(new SimpleEntry<>(i, j));
 
         while(!queue.isEmpty()){
-            Pair temp = queue.poll();
+            SimpleEntry temp = queue.poll();
             int row = (int) temp.getKey();
             int col = (int) temp.getValue();
 
@@ -78,7 +78,7 @@ public class NumberOfDistinctIslands {
                 if(nRow >= 0 && nRow < n && nCol >= 0 && nCol < m
                     && visited[nRow][nCol] == false && grid[nRow][nCol] == '1'){
                     visited[nRow][nCol] = true;
-                    queue.offer(new Pair<>(nRow, nCol));
+                    queue.offer(new SimpleEntry<>(nRow, nCol));
                 }
             }
         }

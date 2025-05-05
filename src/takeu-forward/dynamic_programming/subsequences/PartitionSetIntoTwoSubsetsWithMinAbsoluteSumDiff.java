@@ -1,6 +1,6 @@
 package dynamic_programming.subsequences;
 
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 
 import java.util.HashMap;
 
@@ -182,33 +182,33 @@ public class PartitionSetIntoTwoSubsetsWithMinAbsoluteSumDiff {
          then the range of target will be (-ve to +ve)
          array cannot handle it, so we are creating hashmap
          key being (ind, sum) and value being boolean*/
-        HashMap<Pair<Integer, Integer>, Boolean> dp = new HashMap();
+        HashMap<SimpleEntry<Integer, Integer>, Boolean> dp = new HashMap();
 
         for(int i = 0; i < n; i++)
-            dp.put(new Pair<>(i, 0), true);
+            dp.put(new SimpleEntry<>(i, 0), true);
 
         if(nums[0] <= maxPossibleSum)
-            dp.put(new Pair<>(0, nums[0]), true);
+            dp.put(new SimpleEntry<>(0, nums[0]), true);
 
         for(int ind = 1; ind < n; ind++){
             for(int k = minPossibleSum; k < maxPossibleSum + 1; k++){
 
-                boolean notTake = dp.containsKey(new Pair(ind-1, k)) ? dp.get(new Pair(ind-1, k)) : false;
+                boolean notTake = dp.containsKey(new SimpleEntry(ind-1, k)) ? dp.get(new SimpleEntry(ind-1, k)) : false;
 
                 boolean take = false;
                 if(nums[ind] <= k) {
-                    take = dp.containsKey(new Pair(ind-1, k - nums[ind]))
-                            ? dp.get(new Pair(ind-1, k - nums[ind])) : false;
+                    take = dp.containsKey(new SimpleEntry(ind-1, k - nums[ind]))
+                            ? dp.get(new SimpleEntry(ind-1, k - nums[ind])) : false;
                 }
 
-                dp.put(new Pair(ind, k), take || notTake);
+                dp.put(new SimpleEntry(ind, k), take || notTake);
             }
         }
 
         int minDiff = Integer.MAX_VALUE;
         for(int k = minPossibleSum; k <= maxPossibleSum; k++){
             int s1 = 0;
-            if(dp.get(new Pair(n-1, k)))
+            if(dp.get(new SimpleEntry(n-1, k)))
                 s1 = k;
 
             int s2 = totalSum - s1;

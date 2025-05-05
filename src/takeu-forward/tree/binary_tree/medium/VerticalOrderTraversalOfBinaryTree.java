@@ -1,6 +1,6 @@
 package tree.binary_tree.medium;
 
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 import tree.binary_tree.traversal.TreeNode;
 
 import java.util.*;
@@ -32,15 +32,15 @@ public class VerticalOrderTraversalOfBinaryTree {
         Map<Integer, Map<Integer, TreeSet<Integer>>> nodes = new TreeMap<>();
 
         // Queue for BFS traversal, each element is a pair containing node and its vertical and level information
-        Queue<Pair<TreeNode, Pair<Integer, Integer>>> queue = new LinkedList<>();
+        Queue<SimpleEntry<TreeNode, SimpleEntry<Integer, Integer>>> queue = new LinkedList<>();
 
         // Push the root node with initial vertical and level values (0, 0)
-        queue.offer(new Pair<>(root, new Pair<>(0, 0)));
+        queue.offer(new SimpleEntry<>(root, new SimpleEntry<>(0, 0)));
 
         // level order traversal
         while (!queue.isEmpty()) {
             // Retrieve the node and its vertical and level information from the front of the queue
-            Pair<TreeNode, Pair<Integer, Integer>> p = queue.poll();
+            SimpleEntry<TreeNode, SimpleEntry<Integer, Integer>> p = queue.poll();
             TreeNode node = p.getKey();
 
             // x represents vertical(column) and y represents level
@@ -58,13 +58,13 @@ public class VerticalOrderTraversalOfBinaryTree {
             // we will move left, so vertical will be reduced by 1
             // and we are moving down, so level will increment by 1
             if(node.left != null)
-                queue.offer(new Pair<>(node.left, new Pair<>(x - 1, y + 1)));
+                queue.offer(new SimpleEntry<>(node.left, new SimpleEntry<>(x - 1, y + 1)));
 
             // if right child present, insert it into the queue
             // we will move right, so vertical will be increased by 1
             // and we are moving down, so level will increment by 1
             if(node.right != null)
-                queue.offer(new Pair<>(node.right, new Pair<>(x+1, y+1)));
+                queue.offer(new SimpleEntry<>(node.right, new SimpleEntry<>(x+1, y+1)));
         }
 
         List<List<Integer>> answer = new ArrayList<>();
